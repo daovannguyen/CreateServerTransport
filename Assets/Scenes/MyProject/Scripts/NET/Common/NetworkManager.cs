@@ -4,14 +4,29 @@ using UnityEngine;
 
 public class NetworkManager : MonoSingleton<NetworkManager>
 {
-    public int InternalId;
-    public int indexPlayerPrefab;
     public Server server;
     public Client client;
+
+    [HideInInspector]
+    public int InternalId;
+    [HideInInspector]
+    public bool IsServer = false;
+
+
+
+
 
     private void Awake()
     {
         DontDestroyOnLoad(this);
+    }
+    public void SetPropertyServer()
+    {
+        IsServer = true;
+    }
+    public void SetPropertyClient()
+    {
+        IsServer = false;
     }
 
 }

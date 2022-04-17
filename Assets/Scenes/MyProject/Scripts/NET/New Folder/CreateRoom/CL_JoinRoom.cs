@@ -46,7 +46,7 @@ public class CL_JoinRoom : RegisterEvent
         }
         else
         {
-            roomId_Input.text = "Bạn đã tạo nhóm";
+            roomId_Input.text = jrm.Id.ToString();
         }
     }
 }

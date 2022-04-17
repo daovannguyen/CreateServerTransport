@@ -22,7 +22,7 @@ public static class NetUtility
         var opCode = (OpCode)stream.ReadByte();
         switch(opCode)
         {
-            //case OpCode.KEEP_ALIVE: msg = new NetKeepAlive(stream); break;
+            case OpCode.KEEP_ALIVE: msg = new NetKeepAlive(stream); break;
             case OpCode.WELCOME: msg = new NetWelcome(stream); break;
             case OpCode.JOINROOM: msg = new NetJoinRoom(stream); break;
 

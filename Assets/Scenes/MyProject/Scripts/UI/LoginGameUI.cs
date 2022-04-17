@@ -35,11 +35,13 @@ public class LoginGameUI : MonoBehaviour
     {
         Server.Instance.Init(GetPort());
         Client.Instance.Init(GetIp(), GetPort());
+        NetworkManager.Instance.SetPropertyServer();
         AfterClickButton();
     }
     public void OnClickClientButton()
     {
         Client.Instance.Init(GetIp(), GetPort());
+        NetworkManager.Instance.SetPropertyClient();
         AfterClickButton();
     }
     public string GetIp()
@@ -59,6 +61,7 @@ public class LoginGameUI : MonoBehaviour
     void AfterClickButton()
     {
         LoginUI.SetActive(false);
+        JoinRoomUI.Instance.joinRoomUI.SetActive(true);
         //SceneManager.LoadScene("Lobby");
     }
 }
