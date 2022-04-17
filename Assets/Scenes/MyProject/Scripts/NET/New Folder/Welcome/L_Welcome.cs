@@ -42,7 +42,7 @@ public class L_Welcome : RegisterEvent
     public override void OnEventClient(NetMessage msg)
     {
         CreateIdPlayerMessage pi = JsonUtility.FromJson<CreateIdPlayerMessage>((msg as NetWelcome).ContentBox);
-        NetworkManager.Instance.InternalId = pi.Id;
+        DataOnClient.Instance.InternalId = pi.Id;
     }
     public override void OnEventServer(NetMessage msg, NetworkConnection cnn)
     {

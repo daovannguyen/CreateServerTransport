@@ -12,6 +12,8 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     [HideInInspector]
     public bool IsServer = false;
 
+    // du lieu tren server
+
 
 
 

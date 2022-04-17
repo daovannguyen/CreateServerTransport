@@ -23,12 +23,12 @@ public class JoinRoomUI : MonoSingleton<JoinRoomUI>
 
     private void OnClickJoinRoom()
     {
-
+        FindObjectOfType<L_JoinRoom>().CreateMessageToServer(Convert.ToInt32(roomId_Input.text));
     }
 
     private void OnClickCreateRoom()
     {
-
+        FindObjectOfType<L_JoinRoom>().CreateMessageToServer();
     }
     void AfterClick() { }
 }
