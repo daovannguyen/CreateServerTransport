@@ -129,6 +129,25 @@ public class Server : MonoSingleton<Server>
             }
         }
     }
+
+
+    public void BroadCatOnRoom(RoomInstance room, NetMessage msg)
+    {
+        for (int i = 0; i < connections.Length; i++)
+        {
+            if (connections[i].IsCreated)
+            {
+                if (room.PlayerIds.Contains(i))
+                {
+                    Debug.Log($"Sending {msg.Code} to: {connections[i].InternalId}");
+                    SendToClient(connections[i], msg);
+                }    
+            }
+        }
+    }
+
+
+
     public void SendToClient(NetworkConnection connection, NetMessage msg)
     {
         DataStreamWriter writer;

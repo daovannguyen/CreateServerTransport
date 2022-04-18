@@ -40,12 +40,12 @@ public class L_JoinRoom : RegisterEvent
     }
     #endregion
     #region Server
-    public void CreateMessageToClient(NetworkConnection cnn, string jrmString)
-    {
-        NetJoinRoom njr = new NetJoinRoom();
-        njr.ContentBox = jrmString;
-        Server.Instance.BroadCat(njr);
-    }
+    //public void CreateMessageToClient(NetworkConnection cnn, string jrmString)
+    //{
+    //    NetJoinRoom njr = new NetJoinRoom();
+    //    njr.ContentBox = jrmString;
+    //    Server.Instance.BroadCat(njr);
+    //}
     public override void OnEventServer(NetMessage msg, NetworkConnection cnn)
     {
         NetJoinRoom jr = msg as NetJoinRoom;
@@ -53,63 +53,44 @@ public class L_JoinRoom : RegisterEvent
         //add thành viên khi room có sẵn
         if (jrm.RoomId != -1)
         {
-            int indexRoom = FindIndexRoomById(jrm.RoomId);
+            int indexRoom = RoomInstance.FindIndexRoomById(jrm.RoomId, DataOnServer.Instance.rooms);
             // client join, không có room, server trả về room trống
             if (indexRoom == -1)
             {
-                CreateMessageToClient(cnn, JsonUtility.ToJson(new RoomInstance()));
+                NetJoinRoom njr = new NetJoinRoom();
+                njr.ContentBox = JsonUtility.ToJson(njr);
+                Server.Instance.SendToClient(cnn, njr);
             }
             else
             {
                 DataOnServer.Instance.rooms[indexRoom].AddPlayer(cnn.InternalId);
                 jrm = DataOnServer.Instance.rooms[indexRoom];
-                CreateMessageToClient(cnn, JsonUtility.ToJson(jrm));
+                NetJoinRoom njr = new NetJoinRoom();
+                njr.ContentBox = JsonUtility.ToJson(jrm);
+                Server.Instance.BroadCatOnRoom(jrm, njr);
+                //CreateMessageToClient(cnn, JsonUtility.ToJson(jrm));
             }
         }
         // trường hợp phải tạo room
         else
         {
-            int idRoomRandom;
-            bool thoaMan = false;
-            do
-            {
-                idRoomRandom = Random.Range(1, 100);
-                thoaMan = CheckRoomIdExist(idRoomRandom);
-            }
-            while (thoaMan);
+            int idRoomRandom = RoomInstance.GetNewRoomId(DataOnServer.Instance.rooms);
             RoomInstance room = new RoomInstance(idRoomRandom, cnn.InternalId);
             DataOnServer.Instance.rooms.Add(room);
-            CreateMessageToClient(cnn, JsonUtility.ToJson(room));
+
+            NetJoinRoom njr = new NetJoinRoom();
+            njr.ContentBox = JsonUtility.ToJson(room);
+            Server.Instance.SendToClient(cnn, njr);
         }
     }
 
-    int FindIndexRoomById(int id)
-    {
-        List<RoomInstance> rooms = DataOnServer.Instance.rooms;
-        int lenght = rooms.Count;
-        for (int i = 0; i < lenght; i++)
-        {
-            if (rooms[i].RoomId == id)
-                return i;
-        }
-        return -1;
-    }
+    
 
-    bool CheckRoomIdExist(int roomId)
-    {
-        foreach (var i in DataOnServer.Instance.rooms)
-        {
-            if (roomId == i.RoomId)
-                return true;
-        }
-        return false;
-    }
     #endregion
 
     #region Client
     public void CreateMessageToServer(int roomId = -1)
     {
-        Debug.Log("guei");
         RoomInstance jrm = new RoomInstance();
         if (roomId != -1)
         {
@@ -124,15 +105,15 @@ public class L_JoinRoom : RegisterEvent
     public override void OnEventClient(NetMessage msg)
     {
         RoomInstance jrm = JsonUtility.FromJson<RoomInstance>((msg as NetJoinRoom).ContentBox);
-        Debug.Log((msg as NetJoinRoom).ContentBox);
         if (jrm.RoomId == -1)
         {
             Debug.Log("Không có room");
-        }    
+        }
         else
         {
-            Debug.Log(jrm.RoomId);
-        }    
+            DataOnClient.Instance.room = jrm;
+            Debug.Log(JsonUtility.ToJson(jrm));
+        }
     }
 
     #endregion
