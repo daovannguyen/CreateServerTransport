@@ -11,6 +11,8 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     public int InternalId;
     [HideInInspector]
     public bool IsServer = false;
+    [HideInInspector]
+    public bool IsHost = false;
 
     // du lieu tren server
 
@@ -28,7 +30,10 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     }
     public void SetPropertyClient()
     {
-        IsServer = false;
+    }
+    public void SetPropertyHost()
+    {
+        IsHost = true;
     }
 
 }

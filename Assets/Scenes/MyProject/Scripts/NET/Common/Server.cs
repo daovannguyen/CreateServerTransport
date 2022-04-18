@@ -137,7 +137,7 @@ public class Server : MonoSingleton<Server>
         {
             if (connections[i].IsCreated)
             {
-                if (room.PlayerIds.Contains(i))
+                if (room.PlayerIds.Contains(connections[i].InternalId))
                 {
                     Debug.Log($"Sending {msg.Code} to: {connections[i].InternalId}");
                     SendToClient(connections[i], msg);

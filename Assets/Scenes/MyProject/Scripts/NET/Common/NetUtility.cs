@@ -8,6 +8,8 @@ public enum OpCode
     KEEP_ALIVE,
     WELCOME,
     JOINROOM,
+    CHANGESCENE,
+
 
 
 
@@ -25,6 +27,7 @@ public static class NetUtility
             case OpCode.KEEP_ALIVE: msg = new NetKeepAlive(stream); break;
             case OpCode.WELCOME: msg = new NetWelcome(stream); break;
             case OpCode.JOINROOM: msg = new NetJoinRoom(stream); break;
+            case OpCode.CHANGESCENE: msg = new NetChangeScene(stream); break;
 
             default:
                 Debug.LogError("Message received had no OpCode");
@@ -40,14 +43,16 @@ public static class NetUtility
 
 
 
-    // hình như đay là ở máy client
+    // đay là ở máy client
     public static Action<NetMessage> C_KEEP_ALIVE;
     public static Action<NetMessage> C_WELCOME;
     public static Action<NetMessage> C_JOINROOM;
+    public static Action<NetMessage> C_CHANGESCENE;
 
     // đây ở máy server
     public static Action<NetMessage, NetworkConnection> S_KEEP_ALIVE;
     public static Action<NetMessage, NetworkConnection> S_WELCOME;
     public static Action<NetMessage, NetworkConnection> S_JOINROOM;
+    public static Action<NetMessage, NetworkConnection> S_CHANGESCENE;
 
 }

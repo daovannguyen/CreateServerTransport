@@ -72,4 +72,23 @@ public class RoomInstance
         }
         return false;
     }
+
+    public static RoomInstance FindRoomByHostId(int HostId, List<RoomInstance> rooms)
+    {
+        foreach (var i in rooms)
+        {
+            if (HostId == i.HostId)
+                return i;
+        }
+        return null;
+    }
+    public static bool PlayerExistRoom(int HostId, List<RoomInstance> rooms)
+    {
+        foreach (var i in rooms)
+        {
+            if (i.PlayerIds.Contains(HostId))
+                return true;
+        }
+        return false;
+    }
 }

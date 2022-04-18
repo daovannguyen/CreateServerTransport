@@ -5,28 +5,6 @@ using UnityEngine;
 
 public class L_JoinRoom : RegisterEvent
 {
-    /*
-    private class JoinRoomMessage
-    {
-        public int RoomId;
-        public int HostId;
-        public List<int> PlayerIds;
-        public JoinRoomMessage()
-        {
-            RoomId = -1;
-            HostId = -1;
-            PlayerIds = new List<int>();
-        }
-        public JoinRoomMessage(int _roomId, int _hostId)
-        {
-            RoomId = _roomId;
-            HostId = _hostId;
-            PlayerIds = new List<int>();
-            PlayerIds.Add(HostId);
-        }
-    }
-
-    */
     // quy định biến viết hoa hết là dành cho máy chủ
 
     #region REGISTEEVENT
@@ -40,14 +18,12 @@ public class L_JoinRoom : RegisterEvent
     }
     #endregion
     #region Server
-    //public void CreateMessageToClient(NetworkConnection cnn, string jrmString)
-    //{
-    //    NetJoinRoom njr = new NetJoinRoom();
-    //    njr.ContentBox = jrmString;
-    //    Server.Instance.BroadCat(njr);
-    //}
     public override void OnEventServer(NetMessage msg, NetworkConnection cnn)
     {
+        if (RoomInstance.PlayerExistRoom(cnn.InternalId, DataOnServer.Instance.rooms))
+        {
+            return;
+        }    
         NetJoinRoom jr = msg as NetJoinRoom;
         RoomInstance jrm = JsonUtility.FromJson<RoomInstance>(jr.ContentBox);
         //add thành viên khi room có sẵn
@@ -65,6 +41,7 @@ public class L_JoinRoom : RegisterEvent
             {
                 DataOnServer.Instance.rooms[indexRoom].AddPlayer(cnn.InternalId);
                 jrm = DataOnServer.Instance.rooms[indexRoom];
+                
                 NetJoinRoom njr = new NetJoinRoom();
                 njr.ContentBox = JsonUtility.ToJson(jrm);
                 Server.Instance.BroadCatOnRoom(jrm, njr);
@@ -96,7 +73,6 @@ public class L_JoinRoom : RegisterEvent
         {
             jrm.RoomId = roomId;
         }
-
         jrm.HostId = DataOnClient.Instance.InternalId;
         NetJoinRoom njr = new NetJoinRoom();
         njr.ContentBox = JsonUtility.ToJson(jrm);
@@ -107,12 +83,17 @@ public class L_JoinRoom : RegisterEvent
         RoomInstance jrm = JsonUtility.FromJson<RoomInstance>((msg as NetJoinRoom).ContentBox);
         if (jrm.RoomId == -1)
         {
-            Debug.Log("Không có room");
+            JoinRoomUI.Instance.message_Text.gameObject.SetActive(true);
+            JoinRoomUI.Instance.message_Text.text = "Không có room";
         }
         else
         {
             DataOnClient.Instance.room = jrm;
-            Debug.Log(JsonUtility.ToJson(jrm));
+            if (jrm.HostId == DataOnClient.Instance.InternalId)
+            {
+                NetworkManager.Instance.SetPropertyHost();
+            }
+            JoinRoomUI.Instance.OpenOtherScene("SelectCharactor");
         }
     }
 

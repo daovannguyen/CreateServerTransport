@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MyProject/Scences/Lobby.unity
     guid: dedd84bd7b7850e4984d30cfb8f34df2
+  - enabled: 1
+    path: Assets/Scenes/MyProject/Scences/SelectCharactor.unity
+    guid: 5bd9b1b7eaf33884c80f96bec3725834
+  - enabled: 1
+    path: Assets/Scenes/MyProject/Scences/CreatePlayer.unity
+    guid: 14a70cc51291eef42930d9f36f10c23a
   m_configObjects: {}
