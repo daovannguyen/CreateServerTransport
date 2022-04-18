@@ -23,9 +23,9 @@ public class L_JoinRoom : RegisterEvent
         if (RoomInstance.PlayerExistRoom(cnn.InternalId, DataOnServer.Instance.rooms))
         {
             return;
-        }    
+        }
         NetJoinRoom jr = msg as NetJoinRoom;
-        RoomInstance jrm = JsonUtility.FromJson<RoomInstance>(jr.ContentBox);
+        RoomInstance jrm = JsonUtility.FromJson<RoomInstance>(jr.ContentBox); 
         //add thành viên khi room có sẵn
         if (jrm.RoomId != -1)
         {
@@ -60,9 +60,6 @@ public class L_JoinRoom : RegisterEvent
             Server.Instance.SendToClient(cnn, njr);
         }
     }
-
-    
-
     #endregion
 
     #region Client

@@ -82,6 +82,15 @@ public class RoomInstance
         }
         return null;
     }
+    public static RoomInstance FindRoomByPlayerId(int id, List<RoomInstance> rooms)
+    {
+        foreach (var i in rooms)
+        {
+            if (i.PlayerIds.Contains(id))
+                return i;
+        }
+        return null;
+    }
     public static bool PlayerExistRoom(int HostId, List<RoomInstance> rooms)
     {
         foreach (var i in rooms)

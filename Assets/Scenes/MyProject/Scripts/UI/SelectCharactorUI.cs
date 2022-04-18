@@ -87,16 +87,11 @@ public class SelectCharactorUI : MonoSingleton<SelectCharactorUI>
         {
             float rotation = rotationSpeed * Time.deltaTime;
             playerSelect.transform.Rotate(0, rotation, 0);
-        }    
+        }
         else
         {
             float rotation = -rotationSpeed * Time.deltaTime;
             playerSelect.transform.Rotate(0, rotation, 0);
         }
-    }
-    void OpenNextScene()
-    {
-
-
     }
 }

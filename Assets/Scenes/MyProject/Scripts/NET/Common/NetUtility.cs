@@ -9,6 +9,8 @@ public enum OpCode
     WELCOME,
     JOINROOM,
     CHANGESCENE,
+    CREATEPLAYER,
+
 
 
 
@@ -28,6 +30,7 @@ public static class NetUtility
             case OpCode.WELCOME: msg = new NetWelcome(stream); break;
             case OpCode.JOINROOM: msg = new NetJoinRoom(stream); break;
             case OpCode.CHANGESCENE: msg = new NetChangeScene(stream); break;
+            case OpCode.CREATEPLAYER: msg = new NetCreatePlayer(stream); break;
 
             default:
                 Debug.LogError("Message received had no OpCode");
@@ -48,11 +51,13 @@ public static class NetUtility
     public static Action<NetMessage> C_WELCOME;
     public static Action<NetMessage> C_JOINROOM;
     public static Action<NetMessage> C_CHANGESCENE;
+    public static Action<NetMessage> C_CREATEPLAYER;
 
     // đây ở máy server
     public static Action<NetMessage, NetworkConnection> S_KEEP_ALIVE;
     public static Action<NetMessage, NetworkConnection> S_WELCOME;
     public static Action<NetMessage, NetworkConnection> S_JOINROOM;
     public static Action<NetMessage, NetworkConnection> S_CHANGESCENE;
+    public static Action<NetMessage, NetworkConnection> S_CREATEPLAYER;
 
 }

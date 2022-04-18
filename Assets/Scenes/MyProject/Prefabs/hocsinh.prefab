@@ -1557,6 +1557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5613689252593107262}
   - component: {fileID: 5363063526621784658}
+  - component: {fileID: -3793700815287966263}
   m_Layer: 0
   m_Name: hocsinh
   m_TagString: Untagged
@@ -1602,6 +1603,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &-3793700815287966263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092449734385064836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &5103871376825657738
 GameObject:
   m_ObjectHideFlags: 0
