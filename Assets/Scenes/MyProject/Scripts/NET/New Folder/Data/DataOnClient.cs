@@ -16,6 +16,9 @@ public class DataOnClient : MonoSingleton<DataOnClient>
     public List<GameObject> PlayerPrefabs;
     public List<GameObject> PlayerGameObjects;
 
+    public List<GameObject> SpawnPrefabs;
+    public List<GameObject> SpawnGameObjects;
+
 
 
 
@@ -27,5 +30,6 @@ public class DataOnClient : MonoSingleton<DataOnClient>
         DontDestroyOnLoad(this);
         //PlayerPrefabs = new List<GameObject>();
         PlayerGameObjects = new List<GameObject>();
+        SpawnGameObjects = new List<GameObject>();
     }
 }

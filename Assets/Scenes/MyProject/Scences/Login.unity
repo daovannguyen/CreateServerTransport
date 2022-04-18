@@ -783,6 +783,7 @@ MonoBehaviour:
   client: {fileID: 223974228}
   InternalId: 0
   IsServer: 0
+  IsHost: 0
 --- !u!4 &223974230
 Transform:
   m_ObjectHideFlags: 0
@@ -1034,6 +1035,12 @@ MonoBehaviour:
   - {fileID: 5092449734385064836, guid: 69b4ff0fe1d7f4f45b62a8bd8ff0799b, type: 3}
   - {fileID: 289955969593267112, guid: 8a2129aef95669d40875a7270f237f38, type: 3}
   PlayerGameObjects: []
+  SpawnPrefabs:
+  - {fileID: 8854365147842933598, guid: bb2389341a2180c459db46e945a237e2, type: 3}
+  - {fileID: 7535476565654248614, guid: 50e3504a895eb7a4db43f0953fd5ad0d, type: 3}
+  - {fileID: 7358756591697715952, guid: f2c0ceee25e087147b8fa7dce41864b5, type: 3}
+  - {fileID: 1039490477136244138, guid: 1b927aae9ee9d8640854a292f021a7c4, type: 3}
+  SpawnGameObjects: []
 --- !u!4 &331500445
 Transform:
   m_ObjectHideFlags: 0

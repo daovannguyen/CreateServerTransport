@@ -9,7 +9,18 @@ public class L_CreatePlayer : RegisterEvent
 
     private void Awake()
     {
-        CreateMessageToServer(ObjectType.PLAYER, 0);
+        int indexPrefab = Random.Range(0, 2);
+        Vector3 randomPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+        CreateMessageToServer(ObjectType.PLAYER, indexPrefab, randomPosition);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            int indexPrefab = Random.Range(0, 3);
+            Vector3 randomPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+            CreateMessageToServer(ObjectType.NORMAL, indexPrefab, randomPosition);
+        }
     }
 
     #region REGISTEEVENT
@@ -29,7 +40,6 @@ public class L_CreatePlayer : RegisterEvent
         NetCreatePlayer ncp = msg as NetCreatePlayer;
         ObjectInstance oi = JsonUtility.FromJson<ObjectInstance>(ncp.ContentBox);
         oi.Id = cnn.InternalId;
-        oi.Position = new Vector3(Random.Range(0,10), 0, Random.Range(0, 10));
         ncp.ContentBox = JsonUtility.ToJson(oi);
         Server.Instance.BroadCatOnRoom(room, ncp);
     }
@@ -41,22 +51,28 @@ public class L_CreatePlayer : RegisterEvent
 
     #region Client
     // chỉ gửi kiểu object và chỉ số prefabs
-    public void CreateMessageToServer(ObjectType type, int indexPrefabs)
+    public void CreateMessageToServer(ObjectType type, int indexPrefabs, Vector3 position)
     {
-        ObjectInstance oi = new ObjectInstance(type, 1, indexPrefabs, Vector3.zero, Vector3.zero);
+        ObjectInstance oi = new ObjectInstance(type, 1, indexPrefabs, position, Vector3.zero);
         NetCreatePlayer ncp = new NetCreatePlayer();
         ncp.ContentBox = JsonUtility.ToJson(oi);
         Client.Instance.SendToServer(ncp);
     }
     public override void OnEventClient(NetMessage msg)
     {
+        GameObject player;
         ObjectInstance oi = JsonUtility.FromJson<ObjectInstance>((msg as NetCreatePlayer).ContentBox);
         if (oi.Type == ObjectType.PLAYER)
         {
-            GameObject player = Instantiate(DataOnClient.Instance.PlayerPrefabs[oi.IndexPrefab], oi.Position, Quaternion.identity);
-            player.AddComponent<ObjectId>();
-            player.GetComponent<ObjectId>().Id = oi.Id;
+            player = Instantiate(DataOnClient.Instance.PlayerPrefabs[oi.IndexPrefab], oi.Position, Quaternion.identity);
         }    
+        else //if(oi.Type == ObjectType.NORMAL)
+        {
+            player = Instantiate(DataOnClient.Instance.SpawnPrefabs[oi.IndexPrefab], oi.Position, Quaternion.identity);
+        }
+
+        player.AddComponent<ObjectId>();
+        player.GetComponent<ObjectId>().Id = oi.Id;
     }
 
     #endregion
