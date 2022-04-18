@@ -1,7 +1,7 @@
 echo "# CreateServerTransport" >> README.md
 git init
 git add *
-git commit -m "SpawnObject"
+git commit -m "move player and camera"
 git branch -M main
 git remote add origin https://github.com/daovannguyen/CreateServerTransport.git
 git push -u origin main

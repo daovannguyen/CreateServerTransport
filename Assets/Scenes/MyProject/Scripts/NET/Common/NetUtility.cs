@@ -11,6 +11,7 @@ public enum OpCode
     CHANGESCENE,
     CREATEOBJECT,
     PLAYERSTATE,
+    MOVEPLAYER,
 
 
 
@@ -32,6 +33,7 @@ public static class NetUtility
             case OpCode.CHANGESCENE: msg = new NetChangeScene(stream); break;
             case OpCode.CREATEOBJECT: msg = new NetCreateObject(stream); break;
             case OpCode.PLAYERSTATE: msg = new NetPlayerState(stream); break;
+            case OpCode.MOVEPLAYER: msg = new NetMovePlayer(stream); break;
 
             default:
                 Debug.LogError("Message received had no OpCode");
@@ -54,6 +56,7 @@ public static class NetUtility
     public static Action<NetMessage> C_CHANGESCENE;
     public static Action<NetMessage> C_CREATEOBJECT;
     public static Action<NetMessage> C_PLAYERSTATE;
+    public static Action<NetMessage> C_MOVEPLAYER;
 
     // đây ở máy server
     public static Action<NetMessage, NetworkConnection> S_KEEP_ALIVE;
@@ -62,5 +65,6 @@ public static class NetUtility
     public static Action<NetMessage, NetworkConnection> S_CHANGESCENE;
     public static Action<NetMessage, NetworkConnection> S_CREATEOBJECT;
     public static Action<NetMessage, NetworkConnection> S_PLAYERSTATE;
+    public static Action<NetMessage, NetworkConnection> S_MOVEPLAYER;
 
 }

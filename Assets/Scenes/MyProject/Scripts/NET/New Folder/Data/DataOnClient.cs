@@ -59,7 +59,7 @@ public class DataOnClient : MonoSingleton<DataOnClient>
 
     public GameObject GetPlayerLocal()
     {
-        return GetPlayerWithId(NetworkManager.Instance.InternalId);
+        return GetPlayerWithId(InternalId);
     }
     public GameObject GetPlayerWithId(int id)
     {

@@ -8,8 +8,6 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     public Client client;
 
     [HideInInspector]
-    public int InternalId;
-    [HideInInspector]
     public bool IsServer = false;
     [HideInInspector]
     public bool IsHost = false;
