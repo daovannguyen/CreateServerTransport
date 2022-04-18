@@ -22,7 +22,7 @@ public class ObjectInstance
         Position = Vector3.zero;
         Rotation = Vector3.zero;
     }
-    public ObjectInstance(ObjectType _type, int _id, int _indexPrefab, Vector3 _position, Vector3 _rotation)
+    public ObjectInstance(ObjectType _type, int _id, int _indexPrefab, Vector3 _position, Vector3 _rotation, string _state = "")
     {
         Type = _type;
         Id = _id;

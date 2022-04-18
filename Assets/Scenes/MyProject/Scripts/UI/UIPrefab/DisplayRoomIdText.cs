@@ -19,7 +19,6 @@ public class DisplayRoomIdText : MonoBehaviour
             room = DataOnClient.Instance.room; 
             roomName_Text.text = "Ma phong: " + room.RoomId.ToString() + "\n"
              + "So luong: " + room.PlayerIds.Count.ToString();
-            Debug.Log(JsonUtility.ToJson(room));
         }
         
     }

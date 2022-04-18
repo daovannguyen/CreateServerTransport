@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using Unity.Networking.Transport;
 using UnityEngine;
 
-public class NetCreatePlayer : NetMessage
+public class NetCreateObject : NetMessage
 {
     // cái này máy chủ quản lý;
-    public NetCreatePlayer()
+    public NetCreateObject()
     {
-        Code = OpCode.CREATEPLAYER;
+        Code = OpCode.CREATEOBJECT;
     }
-    public NetCreatePlayer(DataStreamReader reader)
+    public NetCreateObject(DataStreamReader reader)
     {
-        Code = OpCode.CREATEPLAYER;
+        Code = OpCode.CREATEOBJECT;
         Deserialize(reader);
     }
     public override void ReceivedOnClient()
     {
-        NetUtility.C_CREATEPLAYER?.Invoke(this);
+        NetUtility.C_CREATEOBJECT?.Invoke(this);
     }
     public override void ReceivedOnServer(NetworkConnection cnn)
     {
-        NetUtility.S_CREATEPLAYER?.Invoke(this, cnn);
+        NetUtility.S_CREATEOBJECT?.Invoke(this, cnn);
     }
 
 }

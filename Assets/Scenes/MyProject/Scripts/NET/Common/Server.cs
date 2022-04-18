@@ -131,8 +131,9 @@ public class Server : MonoSingleton<Server>
     }
 
 
-    public void BroadCatOnRoom(RoomInstance room, NetMessage msg)
+    public void BroadCatOnRoom(NetworkConnection connection, NetMessage msg)
     {
+        RoomInstance room = RoomInstance.FindRoomByPlayerId(connection.InternalId, DataOnServer.Instance.rooms);
         for (int i = 0; i < connections.Length; i++)
         {
             if (connections[i].IsCreated)

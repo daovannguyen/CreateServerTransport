@@ -77,9 +77,7 @@ public class L_ChangeScene : RegisterEvent
     }
     public override void OnEventServer(NetMessage msg, NetworkConnection cnn)
     {
-        RoomInstance room = RoomInstance.FindRoomByHostId(cnn.InternalId, DataOnServer.Instance.rooms);
-        Debug.Log(JsonUtility.ToJson(room));
-        Server.Instance.BroadCatOnRoom(room, msg);
+        Server.Instance.BroadCatOnRoom(cnn, msg);
     }
 
 }

@@ -44,7 +44,7 @@ public class L_JoinRoom : RegisterEvent
                 
                 NetJoinRoom njr = new NetJoinRoom();
                 njr.ContentBox = JsonUtility.ToJson(jrm);
-                Server.Instance.BroadCatOnRoom(jrm, njr);
+                Server.Instance.BroadCatOnRoom(cnn, njr);
                 //CreateMessageToClient(cnn, JsonUtility.ToJson(jrm));
             }
         }

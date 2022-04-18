@@ -66,6 +66,7 @@ public class SelectCharactorUI : MonoSingleton<SelectCharactorUI>
         else if (indexPlayer >= playerPrefabs.Count)
             indexPlayer = 0;
         DisplayCharactor(indexPlayer);
+        EventManager.CHARACTORSELECTED?.Invoke(indexPlayer);
     }
     void OnClickLeftButton()
     {

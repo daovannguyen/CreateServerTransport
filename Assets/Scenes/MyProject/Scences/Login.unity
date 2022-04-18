@@ -1018,6 +1018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee055b9f48b3784cae34fe246db7f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnCount: -1
 --- !u!114 &331500444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,7 @@ MonoBehaviour:
   - {fileID: 7358756591697715952, guid: f2c0ceee25e087147b8fa7dce41864b5, type: 3}
   - {fileID: 1039490477136244138, guid: 1b927aae9ee9d8640854a292f021a7c4, type: 3}
   SpawnGameObjects: []
+  IndexCharactor: 0
 --- !u!4 &331500445
 Transform:
   m_ObjectHideFlags: 0
