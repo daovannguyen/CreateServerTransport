@@ -72,9 +72,14 @@ public class L_MovePlayer : RegisterEvent
     {
         if (gameObjectControl == null)
         {
-            gameObjectControl = DataOnClient.Instance.GetPlayerLocal();
-            Camera.main.transform.position = gameObjectControl.transform.position + distanceCamera;
-            Camera.main.transform.LookAt(gameObjectControl.transform.position);
+            try
+            {
+                gameObjectControl = DataOnClient.Instance.GetPlayerLocal();
+                Camera.main.transform.position = gameObjectControl.transform.position + distanceCamera;
+                Camera.main.transform.LookAt(gameObjectControl.transform.position);
+            }
+            catch
+            { }
         }
         else
         {

@@ -14,11 +14,20 @@ public class CM_CreateObject : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
         {
-            int indexPrefab = Random.Range(0, 3);
-            Vector3 randomPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
-            l_CreateObject.CreateMessageToServer(ObjectType.NORMAL, indexPrefab, randomPosition);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                int indexPrefab = Random.Range(0, 3);
+                Vector3 randomPosition = DataOnClient.Instance.GetPlayerLocal().transform.position;
+                Debug.Log(randomPosition);
+                l_CreateObject.CreateMessageToServer(ObjectType.NORMAL, indexPrefab, randomPosition);
+            }
+
         }
     }
 }
